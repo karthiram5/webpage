@@ -1,17 +1,42 @@
 // ─── Shared Data ────────────────────────────────────────────────────────────
 // Declared with var so they are available globally for all component files.
 
-var NAV_LINKS = ['Home', 'About', 'Skills', 'Experience', 'Education', 'Contact'];
+var NAV_LINKS = ['Home', 'About', 'Skills', 'Tools', 'Education', 'Contact'];
+
+var TOOLS = [
+  { icon: '💙', name: 'Visual Studio',    category: 'IDE' },
+  { icon: '📝', name: 'VS Code',          category: 'IDE' },
+  { icon: '�️', name: 'Cursor',           category: 'AI Tools' },
+  { icon: '🔌', name: 'MCP Server',       category: 'AI Tools' },
+  { icon: '🚀', name: 'Antigravity',      category: 'AI Tools' },
+  { icon: '🐙', name: 'Git & GitHub',     category: 'Version Control' },
+  { icon: '🐋', name: 'Docker',           category: 'DevOps' },
+  { icon: '☁️', name: 'Azure',            category: 'Cloud' },
+  { icon: '🗄️', name: 'SSMS',            category: 'Database' },
+  { icon: '🐘', name: 'PostgreSQL',       category: 'Database' },
+  { icon: '🐬', name: 'MySQL',            category: 'Database' },
+  { icon: '📬', name: 'Postman',          category: 'API Testing' },
+  { icon: '🔍', name: 'Chrome DevTools',  category: 'Debugging' },
+  { icon: '📦', name: 'npm / NuGet',      category: 'Package Mgmt' },
+  { icon: '🖥️', name: 'IIS',             category: 'Web Server' },
+];
 
 var SKILLS = [
-  { icon: '💻', label: '.NET / C#',            pct: 88 },
-  { icon: '🟩', label: 'Node.js',               pct: 85 },
-  { icon: '🔺', label: 'Three.js',              pct: 80 },
-  { icon: '🗄️', label: 'SQL / NoSQL',           pct: 82 },
-  { icon: '🔗', label: 'REST APIs',             pct: 90 },
-  { icon: '☁️', label: 'Cloud / DevOps',        pct: 70 },
-  { icon: '🎨', label: 'HTML / CSS / JS',       pct: 92 },
-  { icon: '🐙', label: 'Git & Version Control', pct: 86 },
+  // Frontend
+  { icon: '🎨', label: 'HTML / CSS / JS',       pct: 92, category: 'Frontend' },
+  { icon: '🔺', label: 'Three.js',              pct: 80, category: 'Frontend' },
+  { icon: '⚛️', label: 'React',                 pct: 78, category: 'Frontend' },
+  // Backend
+  { icon: '💻', label: '.NET / C#',            pct: 88, category: 'Backend' },
+  { icon: '🟩', label: 'Node.js',               pct: 85, category: 'Backend' },
+  { icon: '🔗', label: 'REST APIs',             pct: 90, category: 'Backend' },
+  // Database
+  { icon: '🐘', label: 'PostgreSQL',            pct: 85, category: 'Database' },
+  { icon: '🐬', label: 'MySQL',                 pct: 82, category: 'Database' },
+  // DevOps & Cloud
+  { icon: '☁️', label: 'Azure',                 pct: 72, category: 'DevOps & Cloud' },
+  { icon: '🐋', label: 'Docker',                pct: 68, category: 'DevOps & Cloud' },
+  { icon: '🐙', label: 'Git & Version Control', pct: 86, category: 'DevOps & Cloud' },
 ];
 
 var EXPERIENCE = [

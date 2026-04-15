@@ -14,6 +14,7 @@
         <Hero />
         <About />
         <Skills />
+        <Tools />
         <Experience />
         <Education />
         <Contact />

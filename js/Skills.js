@@ -26,17 +26,33 @@
         <div className="bar-bg">
           <div className="bar" ref={barRef} style={{ width: 0 }}></div>
         </div>
+        <span className="skill-pct">{pct}%</span>
       </div>
     );
   }
 
   function Skills() {
+    // Build ordered unique category list
+    const categories = [];
+    SKILLS.forEach(s => {
+      if (!categories.includes(s.category)) categories.push(s.category);
+    });
+
     return (
       <section id="skills" className="section">
         <h2 className="section-title">Technical Skills</h2>
-        <div className="skills-grid">
-          {SKILLS.map(s => <SkillCard key={s.label} {...s} />)}
-        </div>
+        {categories.map(cat => (
+          <div className="skill-partition" key={cat}>
+            <div className="skill-partition-header">
+              <span className="skill-partition-label">{cat}</span>
+            </div>
+            <div className="skills-grid">
+              {SKILLS.filter(s => s.category === cat).map(s => (
+                <SkillCard key={s.label} {...s} />
+              ))}
+            </div>
+          </div>
+        ))}
       </section>
     );
   }
@@ -44,3 +60,4 @@
   window.SkillCard = SkillCard;
   window.Skills    = Skills;
 })();
+
