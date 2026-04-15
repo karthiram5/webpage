@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karthikeyan Ramalingam | Portfolio</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <!-- React + ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel (compiles JSX in the browser) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Shared data (plain JS — must load before React components) -->
+  <script src="js/data.js"></script>
+</head>
+<body>
+
+  <canvas id="bg"></canvas>
+  <div id="root"></div>
+
+  <!-- React components — loaded in dependency order -->
+  <script type="text/babel" src="js/ThreeBackground.js"></script>
+  <script type="text/babel" src="js/Navbar.js"></script>
+  <script type="text/babel" src="js/Hero.js"></script>
+  <script type="text/babel" src="js/About.js"></script>
+  <script type="text/babel" src="js/Skills.js"></script>
+  <script type="text/babel" src="js/Experience.js"></script>
+  <script type="text/babel" src="js/Education.js"></script>
+  <script type="text/babel" src="js/Contact.js"></script>
+  <script type="text/babel" src="js/Footer.js"></script>
+
+  <script type="text/babel" src="js/WelcomeSplash.js"></script>
+
+  <!-- App root — renders everything into #root -->
+  <script type="text/babel" src="js/App.js"></script>
+
+</body>
+</html>
+
