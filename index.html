@@ -41,6 +41,68 @@
   <!-- App root — renders everything into #root -->
   <script type="text/babel" src="js/App.js"></script>
 
+  <!-- Bidirectional scroll-reveal observer -->
+  <script>
+    (function () {
+      var lastY = window.scrollY;
+
+      function initReveal() {
+        // Select targets: section titles, cards, timeline items, skill cards, etc.
+        var selectors = [
+          '.section-title',
+          '.about-grid .card',
+          '.skill-card',
+          '.tl-item',
+          '.edu-card',
+          '.tool-card',
+          '.contact-card',
+          '.skill-partition'
+        ];
+
+        selectors.forEach(function (sel) {
+          document.querySelectorAll(sel).forEach(function (el, i) {
+            el.classList.add('sr');
+            // Alternate left/right for timeline items
+            if (sel === '.tl-item') {
+              el.classList.add(i % 2 === 0 ? 'sr-left' : 'sr-right');
+            } else {
+              el.classList.add('sr-up');
+            }
+          });
+        });
+
+        // Add stagger to grids
+        document.querySelectorAll('.skills-grid, .edu-grid, .about-grid').forEach(function (g) {
+          g.classList.add('sr-stagger');
+        });
+
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var el = entry.target;
+            if (entry.isIntersecting) {
+              el.classList.add('visible');
+            } else {
+              el.classList.remove('visible');
+              var wasAbove = entry.boundingClientRect.top < 0;
+              el.classList.remove('sr-up', 'sr-down', 'sr-left', 'sr-right');
+              if (el.classList.contains('tl-item')) {
+                var idx = Array.from(el.parentElement.children).indexOf(el);
+                el.classList.add(idx % 2 === 0 ? 'sr-left' : 'sr-right');
+              } else {
+                el.classList.add(wasAbove ? 'sr-down' : 'sr-up');
+              }
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.sr').forEach(function (el) { obs.observe(el); });
+      }
+
+      // Wait for React to finish rendering (after splash)
+      setTimeout(initReveal, 4800);
+    })();
+  </script>
+
 </body>
 </html>
 

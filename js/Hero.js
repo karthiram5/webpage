@@ -3,6 +3,23 @@
 (function () {
   const { useState, useEffect } = React;
 
+  function useTypewriter(text, startDelay) {
+    const [display, setDisplay] = useState('');
+    const [done, setDone] = useState(false);
+    useEffect(() => {
+      var i = 0, iv, t;
+      t = setTimeout(function () {
+        iv = setInterval(function () {
+          i++;
+          setDisplay(text.slice(0, i));
+          if (i >= text.length) { clearInterval(iv); setDone(true); }
+        }, 110);
+      }, startDelay);
+      return function () { clearTimeout(t); clearInterval(iv); };
+    }, []);
+    return { display, done };
+  }
+
   function RobotSVG() {
     return (
       <svg className="ai-robot" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
@@ -83,11 +100,10 @@
 
   function Hero() {
     const [greeting, setGreeting] = useState(false);
+    const { display: twName, done: twDone } = useTypewriter('Karthikeyan Ramalingam', 4300);
 
     useEffect(() => {
-      // Splash finishes at ~4.2s — show greeting just after
       const show = setTimeout(() => setGreeting(true), 4400);
-      // Hide after 5s of being visible
       const hide = setTimeout(() => setGreeting(false), 9600);
       return () => { clearTimeout(show); clearTimeout(hide); };
     }, []);
@@ -107,20 +123,22 @@
             <RobotSVG />
           </div>
           <div className="hero-text">
-            <h1>Karthikeyan Ramalingam</h1>
-            <p className="tagline">Full Stack Developer</p>
-            <p className="bio">
-              Passionate Software Engineer with {calcYearsExp()} years of experience building robust,
-              scalable web applications. Specialized in .NET and Node.js ecosystems,
-              delivering end-to-end solutions from database to UI.
-            </p>
-            <div className="btn-group">
-              <a href="#contact" className="btn btn-primary" onClick={scrollToContact}>
-                Get In Touch
-              </a>
-              <a href="#experience" className="btn btn-outline" onClick={scrollToExperience}>
-                View Experience
-              </a>
+            <h1 className={twDone ? 'tw-done' : ''}>{twName || '\u00A0'}</h1>
+            <div className={twDone ? 'hero-sub hero-sub--visible' : 'hero-sub'}>
+              <p className="tagline">Full Stack Developer</p>
+              <p className="bio">
+                Passionate Software Engineer with {calcYearsExp()} years of experience building robust,
+                scalable web applications. Specialized in .NET and Node.js ecosystems,
+                delivering end-to-end solutions from database to UI.
+              </p>
+              <div className="btn-group">
+                <a href="#contact" className="btn btn-primary" onClick={scrollToContact}>
+                  Get In Touch
+                </a>
+                <a href="#experience" className="btn btn-outline" onClick={scrollToExperience}>
+                  View Experience
+                </a>
+              </div>
             </div>
           </div>
         </div>

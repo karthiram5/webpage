@@ -4,8 +4,8 @@
 var NAV_LINKS = ['Home', 'About', 'Skills', 'Tools', 'Education', 'Contact'];
 
 var TOOLS = [
-  { icon: '💙', name: 'Visual Studio',    category: 'IDE' },
-  { icon: '📝', name: 'VS Code',          category: 'IDE' },
+  { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg', name: 'Visual Studio', category: 'IDE' },
+  { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',        name: 'VS Code',        category: 'IDE' },
   { icon: '�️', name: 'Cursor',           category: 'AI Tools' },
   { icon: '🔌', name: 'MCP Server',       category: 'AI Tools' },
   { icon: '🚀', name: 'Antigravity',      category: 'AI Tools' },
