@@ -32,7 +32,14 @@
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
+          <filter id="bodyGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
         </defs>
+
+        {/* Subtle outer glow behind robot body */}
+        <ellipse cx="80" cy="140" rx="52" ry="46" fill="#6a8fff" opacity="0.07" filter="url(#bodyGlow)" />
 
         {/* Antenna */}
         <line x1="80" y1="18" x2="80" y2="35" stroke="#6a8fff" strokeWidth="2.5" strokeLinecap="round"/>
@@ -115,6 +122,9 @@
       <section id="home" className="hero">
         <div className="hero-inner">
           <div className="robot-wrap">
+            {/* Decorative orbit rings */}
+            <div className="robot-orbit"></div>
+            <div className="robot-orbit-2"></div>
             {greeting && (
               <div className="robot-bubble">
                 👋 Hi! Thank you for visiting!
@@ -123,7 +133,7 @@
             <RobotSVG />
           </div>
           <div className="hero-text">
-            <h1 className={twDone ? 'tw-done' : ''}>{twName || '\u00A0'}</h1>
+            <h1 className={twDone ? 'tw-done' : ''}>{twName || ' '}</h1>
             <div className={twDone ? 'hero-sub hero-sub--visible' : 'hero-sub'}>
               <p className="tagline">Full Stack Developer</p>
               <p className="bio">
@@ -141,6 +151,13 @@
               </div>
             </div>
           </div>
+        </div>
+        {/* Scroll indicator */}
+        <div className="scroll-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+          <span>scroll</span>
         </div>
       </section>
     );

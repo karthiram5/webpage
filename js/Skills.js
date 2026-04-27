@@ -6,6 +6,7 @@
   function SkillCard({ icon, label, pct }) {
     const cardRef = useRef(null);
     const barRef  = useRef(null);
+    const isImg   = typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('data:'));
 
     useEffect(() => {
       const observer = new IntersectionObserver(([entry]) => {
@@ -21,7 +22,12 @@
 
     return (
       <div className="skill-card" ref={cardRef}>
-        <div className="skill-icon">{icon}</div>
+        <div className="skill-icon">
+          {isImg
+            ? <img src={icon} alt={label} style={{ width: '2.2rem', height: '2.2rem', objectFit: 'contain' }} />
+            : icon
+          }
+        </div>
         <h4>{label}</h4>
         <div className="bar-bg">
           <div className="bar" ref={barRef} style={{ width: 0 }}></div>

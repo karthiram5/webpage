@@ -1,10 +1,11 @@
 // ─── Navbar Component ────────────────────────────────────────────────────────
 
 (function () {
-  const { useState, useEffect } = React;
+  const { useState, useEffect, useRef } = React;
 
   function Navbar() {
     const [active, setActive] = useState('home');
+    const navRef              = useRef(null);
 
     useEffect(() => {
       const observers = [];
@@ -17,7 +18,15 @@
         obs.observe(el);
         observers.push(obs);
       });
-      return () => observers.forEach(o => o.disconnect());
+
+      const nav = navRef.current;
+      const onScroll = () => nav && nav.classList.toggle('scrolled', window.scrollY > 20);
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      return () => {
+        observers.forEach(o => o.disconnect());
+        window.removeEventListener('scroll', onScroll);
+      };
     }, []);
 
     const scrollTo = (id) => {
@@ -26,7 +35,7 @@
     };
 
     return (
-      <nav className="nav">
+      <nav ref={navRef} className="nav">
         <div className="nav-logo">KR</div>
         <ul className="nav-links">
           {NAV_LINKS.map(l => (
