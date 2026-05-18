@@ -2,7 +2,7 @@
 
 (function () {
   function ToolCard({ icon, name, category }) {
-    const isImg = typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('data:'));
+    const isImg = typeof icon === 'string' && (icon.startsWith('https') || icon.startsWith('data:'));
     return (
       <div className="tool-card">
         <div className="tool-icon">

@@ -9,7 +9,7 @@ var DI = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/';
 var SI = 'https://cdn.simpleicons.org/';
 
 // Inline SVG data URI for SQL Server — no CDN dependency, always renders
-var SQL_SERVER_ICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='10' ry='3.2' fill='%23CC2927'/%3E%3Cpath fill='%23a31f1f' d='M2 5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2V5c0 1.77-4.48 3.2-10 3.2S2 6.77 2 5z'/%3E%3Cpath fill='%23CC2927' d='M2 10.5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2v-5.5c0 1.77-4.48 3.2-10 3.2S2 12.27 2 10.5z'/%3E%3Cellipse cx='12' cy='19.2' rx='10' ry='3.2' fill='%23a31f1f'/%3E%3Ctext x='12' y='19.8' font-family='Arial' font-size='4.5' font-weight='bold' fill='white' text-anchor='middle'%3ESQL%3C/text%3E%3C/svg%3E";
+var SQL_SERVER_ICON = "data:image/svg+xml,%3Csvg xmlns='https://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='10' ry='3.2' fill='%23CC2927'/%3E%3Cpath fill='%23a31f1f' d='M2 5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2V5c0 1.77-4.48 3.2-10 3.2S2 6.77 2 5z'/%3E%3Cpath fill='%23CC2927' d='M2 10.5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2v-5.5c0 1.77-4.48 3.2-10 3.2S2 12.27 2 10.5z'/%3E%3Cellipse cx='12' cy='19.2' rx='10' ry='3.2' fill='%23a31f1f'/%3E%3Ctext x='12' y='19.8' font-family='Arial' font-size='4.5' font-weight='bold' fill='white' text-anchor='middle'%3ESQL%3C/text%3E%3C/svg%3E";
 
 var TOOLS = [
   { icon: DI + 'visualstudio/visualstudio-plain.svg',           name: 'Visual Studio',    category: 'IDE' },

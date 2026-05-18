@@ -22,7 +22,7 @@
 
   function RobotSVG() {
     return (
-      <svg className="ai-robot" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
+      <svg className="ai-robot" viewBox="0 0 160 200" xmlns="https://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#6a8fff" />

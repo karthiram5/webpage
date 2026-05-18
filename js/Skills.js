@@ -2,7 +2,7 @@
 
 (function () {
   function SkillCard({ icon, label }) {
-    const isImg   = typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('data:'));
+    const isImg   = typeof icon === 'string' && (icon.startsWith('https') || icon.startsWith('data:'));
 
     return (
       <div className="skill-card">
