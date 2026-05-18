@@ -27,7 +27,8 @@
             <ul className="info-list">
               <li><span className="lbl">Name</span>Karthikeyan Ramalingam</li>
               <li><span className="lbl">Role</span>Full Stack Developer</li>
-              <li><span className="lbl">Stack</span>.NET &amp; Node.js</li>
+              <li><span className="lbl">Freelance</span>Available (Websites, E-Commerce)</li>
+              <li><span className="lbl">Stack</span>Full Stack</li>
               <li><span className="lbl">Experience</span>{calcYearsExp()}</li>
               <li><span className="lbl">Location</span>Kanchipuram, Tamil Nadu, India</li>
               <li>

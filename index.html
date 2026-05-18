@@ -31,6 +31,7 @@
   <script type="text/babel" src="js/About.js"></script>
   <script type="text/babel" src="js/Skills.js"></script>
   <script type="text/babel" src="js/Tools.js"></script>
+  <script type="text/babel" src="js/Projects.js"></script>
   <script type="text/babel" src="js/Experience.js"></script>
   <script type="text/babel" src="js/Education.js"></script>
   <script type="text/babel" src="js/Contact.js"></script>
@@ -52,6 +53,7 @@
           '.section-title',
           '.about-grid .card',
           '.skill-card',
+          '.project-card',
           '.tl-item',
           '.edu-card',
           '.tool-card',
@@ -72,7 +74,7 @@
         });
 
         // Add stagger to grids
-        document.querySelectorAll('.skills-grid, .edu-grid, .about-grid').forEach(function (g) {
+        document.querySelectorAll('.skills-grid, .projects-grid, .edu-grid, .about-grid').forEach(function (g) {
           g.classList.add('sr-stagger');
         });
 

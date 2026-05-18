@@ -1,7 +1,7 @@
 // ─── Shared Data ────────────────────────────────────────────────────────────
 // Declared with var so they are available globally for all component files.
 
-var NAV_LINKS = ['Home', 'About', 'Skills', 'Tools', 'Education', 'Contact'];
+var NAV_LINKS = ['Home', 'About', 'Skills', 'Tools', 'Projects', 'Experience', 'Education', 'Contact'];
 
 // ── Icon helpers ──────────────────────────────────────────────────────────
 var DI = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/';
@@ -40,22 +40,37 @@ var TOOLS = [
 
 var SKILLS = [
   // Frontend
-  { icon: DI + 'html5/html5-original.svg',             label: 'HTML / CSS / JS',      pct: 92, category: 'Frontend' },
-  { icon: DI + 'angular/angular-original.svg',         label: 'Angular',              pct: 82, category: 'Frontend' },
-  { icon: DI + 'react/react-original.svg',             label: 'React',                pct: 78, category: 'Frontend' },
-  { icon: '🔮',                                         label: 'Three.js',             pct: 80, category: 'Frontend' },
+  { icon: DI + 'html5/html5-original.svg',             label: 'HTML / CSS / JS',      category: 'Frontend' },
+  { icon: DI + 'angular/angular-original.svg',         label: 'Angular',              category: 'Frontend' },
+  { icon: DI + 'react/react-original.svg',             label: 'React',                category: 'Frontend' },
+  { icon: '🔮',                                         label: 'Three.js',             category: 'Frontend' },
   // Backend
-  { icon: DI + 'dotnetcore/dotnetcore-original.svg',   label: '.NET / C#',            pct: 88, category: 'Backend' },
-  { icon: DI + 'nodejs/nodejs-original.svg',           label: 'Node.js',              pct: 85, category: 'Backend' },
-  { icon: DI + 'php/php-original.svg',                 label: 'PHP',                  pct: 75, category: 'Backend' },
-  { icon: '🌐',                                         label: 'REST APIs',            pct: 90, category: 'Backend' },
+  { icon: DI + 'dotnetcore/dotnetcore-original.svg',   label: '.NET / C#',            category: 'Backend' },
+  { icon: DI + 'nodejs/nodejs-original.svg',           label: 'Node.js',              category: 'Backend' },
+  { icon: DI + 'php/php-original.svg',                 label: 'PHP',                  category: 'Backend' },
+  { icon: '🌐',                                         label: 'REST APIs',            category: 'Backend' },
   // Database
-  { icon: DI + 'postgresql/postgresql-original.svg',   label: 'PostgreSQL',           pct: 85, category: 'Database' },
-  { icon: DI + 'mysql/mysql-original.svg',             label: 'MySQL',                pct: 82, category: 'Database' },
+  { icon: DI + 'postgresql/postgresql-original.svg',   label: 'PostgreSQL',           category: 'Database' },
+  { icon: DI + 'mysql/mysql-original.svg',             label: 'MySQL',                category: 'Database' },
   // DevOps & Cloud
-  { icon: DI + 'azure/azure-original.svg',             label: 'Azure',                pct: 72, category: 'DevOps & Cloud' },
-  { icon: DI + 'docker/docker-original.svg',           label: 'Docker',               pct: 68, category: 'DevOps & Cloud' },
-  { icon: DI + 'git/git-original.svg',                 label: 'Git & Version Control',pct: 86, category: 'DevOps & Cloud' },
+  { icon: DI + 'azure/azure-original.svg',             label: 'Azure',                category: 'DevOps & Cloud' },
+  { icon: DI + 'docker/docker-original.svg',           label: 'Docker',               category: 'DevOps & Cloud' },
+  { icon: DI + 'git/git-original.svg',                 label: 'Git & Version Control',category: 'DevOps & Cloud' },
+];
+
+var PROJECTS = [
+  {
+    code: 'NPS',
+    title: 'Net Promoter Scores',
+    desc: 'Implemented a customer feedback and scoring workflow to track promoter, passive, and detractor trends with actionable dashboards.',
+    stack: ['PHP-CodeIgniter','MySQL', 'REST APIs']
+  },
+  {
+    code: 'PPS',
+    title: 'Production Planning Software',
+    desc: 'Developed planning and execution modules to improve production scheduling, material visibility, and delivery coordination across teams.',
+    stack: ['React', 'Node.js', 'PostgreSQL', 'GitHub', 'Docker', 'AWS']
+  }
 ];
 
 var EXPERIENCE = [
@@ -64,14 +79,14 @@ var EXPERIENCE = [
     company: 'Different Hair Pvt. Ltd · Chennai, Tamil Nadu, India',
     start: '2025-03',
     end: null,
-    desc: 'Building and maintaining full-stack web applications using .NET and Node.js. Collaborating with cross-functional teams to design and deliver scalable, high-performance solutions aligned with business goals.',
+    desc: 'Building and maintaining full-stack web applications using .NET, Node.js and PHP. Collaborating with cross-functional teams to design and deliver scalable, high-performance solutions aligned with business goals.',
   },
   {
     role: 'Software Engineer',
     company: 'RepuNEXT · Chennai, Tamil Nadu, India',
     start: '2021-06',
     end: '2025-03',
-    desc: 'Worked as a Software Engineer contributing to the full development lifecycle — requirement analysis, system design, implementation and production support using .NET, Node.js, and modern front-end frameworks.',
+    desc: 'Worked as a Software Engineer contributing to the full development lifecycle — requirement analysis, system design, implementation and production support using .NET, Node.js, PHP, and modern front-end frameworks.',
   },
 ];
 

@@ -15,6 +15,7 @@
         <About />
         <Skills />
         <Tools />
+        <Projects />
         <Experience />
         <Education />
         <Contact />

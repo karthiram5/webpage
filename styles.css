@@ -296,10 +296,77 @@ canvas#bg {
   margin-left: auto; margin-right: auto;
 }
 .skill-icon img { display: block; width: 2.2rem; height: 2.2rem; object-fit: contain; }
-.skill-card h4 { font-size:1rem; color:#d0d8ff; margin-bottom:10px; }
-.bar-bg { height:6px; background:rgba(255,255,255,.1); border-radius:4px; overflow:hidden; }
-.bar    { height:100%; background:linear-gradient(90deg,#6a8fff,#bf9aff); border-radius:4px; transition:width 1.5s ease; }
-.skill-pct { display:block; margin-top:8px; font-size:.78rem; color:#7a88ff; font-weight:600; }
+.skill-card h4 { font-size:1rem; color:#d0d8ff; margin-bottom:0; }
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+.project-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(106,143,255,.2);
+  border-radius: 18px;
+  padding: 24px;
+  backdrop-filter: blur(8px);
+  transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s ease, border-color .32s ease;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -35%;
+  width: 48%;
+  height: 220%;
+  transform: rotate(20deg);
+  background: linear-gradient(180deg, rgba(106,143,255,0), rgba(106,143,255,.14), rgba(106,143,255,0));
+  opacity: 0;
+  transition: left .55s ease, opacity .35s ease;
+}
+.project-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(106,143,255,.48);
+  box-shadow: 0 16px 44px rgba(106,143,255,.22);
+}
+.project-card:hover::before {
+  left: 105%;
+  opacity: 1;
+}
+.project-top { margin-bottom: 12px; }
+.project-code {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #8ea0ff;
+  background: rgba(106,143,255,.14);
+  border: 1px solid rgba(106,143,255,.3);
+  border-radius: 20px;
+  padding: 4px 10px;
+  margin-bottom: 10px;
+}
+.project-card h3 {
+  color: #dfe6ff;
+  font-size: 1.1rem;
+}
+.project-card p {
+  color: #bcc7ff;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.project-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+.project-stack span {
+  font-size: .76rem;
+  color: #9fb0ff;
+  background: rgba(106,143,255,.08);
+  border: 1px solid rgba(106,143,255,.2);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
 
 /* TIMELINE */
 .timeline { position:relative; }
@@ -546,30 +613,30 @@ footer { padding: 26px; border-top: 1px solid rgba(106,143,255,.1); }
 /* ── Scroll-reveal base ─────────────────────────────────────────── */
 .sr {
   opacity: 0;
-  transition: opacity 0.65s ease, transform 0.65s ease;
+  transition: opacity 0.82s cubic-bezier(.22,.61,.36,1), transform 0.82s cubic-bezier(.22,.61,.36,1);
   will-change: opacity, transform;
 }
 /* from bottom (scroll down) */
-.sr-up   { transform: translateY(36px); }
+.sr-up   { transform: translateY(30px); }
 /* from top   (scroll up)   */
-.sr-down { transform: translateY(-36px); }
+.sr-down { transform: translateY(-30px); }
 /* from left */
-.sr-left { transform: translateX(-48px); }
+.sr-left { transform: translateX(-40px); }
 /* from right */
-.sr-right{ transform: translateX(48px); }
+.sr-right{ transform: translateX(40px); }
 /* visible */
 .sr.visible {
   opacity: 1;
   transform: translate(0, 0);
 }
 /* stagger delays for child elements */
-.sr-stagger > *:nth-child(1)  { transition-delay: 0.05s; }
-.sr-stagger > *:nth-child(2)  { transition-delay: 0.15s; }
-.sr-stagger > *:nth-child(3)  { transition-delay: 0.25s; }
-.sr-stagger > *:nth-child(4)  { transition-delay: 0.35s; }
-.sr-stagger > *:nth-child(5)  { transition-delay: 0.45s; }
-.sr-stagger > *:nth-child(6)  { transition-delay: 0.55s; }
-.sr-stagger > *:nth-child(n+7){ transition-delay: 0.65s; }
+.sr-stagger > *:nth-child(1)  { transition-delay: 0.06s; }
+.sr-stagger > *:nth-child(2)  { transition-delay: 0.13s; }
+.sr-stagger > *:nth-child(3)  { transition-delay: 0.20s; }
+.sr-stagger > *:nth-child(4)  { transition-delay: 0.27s; }
+.sr-stagger > *:nth-child(5)  { transition-delay: 0.34s; }
+.sr-stagger > *:nth-child(6)  { transition-delay: 0.41s; }
+.sr-stagger > *:nth-child(n+7){ transition-delay: 0.48s; }
 
 /* ═══════════════════════════════════════════════════════════════════
    ANIMATION & POLISH IMPROVEMENTS

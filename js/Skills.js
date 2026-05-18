@@ -1,27 +1,11 @@
 // ─── Skills Components ───────────────────────────────────────────────────────
 
 (function () {
-  const { useEffect, useRef } = React;
-
-  function SkillCard({ icon, label, pct }) {
-    const cardRef = useRef(null);
-    const barRef  = useRef(null);
+  function SkillCard({ icon, label }) {
     const isImg   = typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('data:'));
 
-    useEffect(() => {
-      const observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting && barRef.current) {
-          barRef.current.style.width = pct + '%';
-          observer.disconnect();
-        }
-      }, { threshold: 0.3 });
-
-      if (cardRef.current) observer.observe(cardRef.current);
-      return () => observer.disconnect();
-    }, [pct]);
-
     return (
-      <div className="skill-card" ref={cardRef}>
+      <div className="skill-card">
         <div className="skill-icon">
           {isImg
             ? <img src={icon} alt={label} style={{ width: '2.2rem', height: '2.2rem', objectFit: 'contain' }} />
@@ -29,10 +13,6 @@
           }
         </div>
         <h4>{label}</h4>
-        <div className="bar-bg">
-          <div className="bar" ref={barRef} style={{ width: 0 }}></div>
-        </div>
-        <span className="skill-pct">{pct}%</span>
       </div>
     );
   }
