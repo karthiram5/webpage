@@ -1,5 +1,4 @@
 // ─── ThreeBackground Component ──────────────────────────────────────────────
-// Mounts a Three.js animated star-field + wireframe shapes onto canvas#bg.
 
 (function () {
   const { useEffect } = React;
@@ -16,7 +15,7 @@
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.z = 5;
 
-      // Star field
+      // ── Star field ────────────────────────────────────────────────────
       const starGeo = new THREE.BufferGeometry();
       const N = 3500;
       const pos = new Float32Array(N * 3);
@@ -38,7 +37,7 @@
       );
       scene.add(stars);
 
-      // Nebula blobs — large semi-transparent spheres that add depth colour
+      // ── Nebula blobs ──────────────────────────────────────────────────
       function addNebula(color, x, y, z, r) {
         const mesh = new THREE.Mesh(
           new THREE.SphereGeometry(r, 8, 8),
@@ -51,7 +50,7 @@
       const neb1 = addNebula(0x2255dd, -18, 10, -28, 14);
       const neb2 = addNebula(0x882266, 22,  -6, -32, 11);
 
-      // Wireframe shapes
+      // ── Wireframe shapes ──────────────────────────────────────────────
       const shapes = [];
       const addShape = (geo, color, x, y, z) => {
         const mesh = new THREE.Mesh(
@@ -73,7 +72,116 @@
       pt.position.set(5, 5, 5);
       scene.add(pt);
 
-      // ── Shooting star system ────────────────────────────────────────
+      // ── DNA HELIX ─────────────────────────────────────────────────────
+      const helixGroup = new THREE.Group();
+      helixGroup.position.set(7, 0, -7);
+      const N_HELIX = 28;
+      for (let i = 0; i < N_HELIX; i++) {
+        const t = (i / N_HELIX) * Math.PI * 7;
+        const yPos = (i / N_HELIX - 0.5) * 8;
+        const R = 0.85;
+        const s1 = new THREE.Mesh(
+          new THREE.SphereGeometry(0.065, 6, 6),
+          new THREE.MeshBasicMaterial({ color: 0x6a8fff, transparent: true, opacity: 0.85 })
+        );
+        s1.position.set(Math.cos(t) * R, yPos, Math.sin(t) * R);
+        const s2 = new THREE.Mesh(
+          new THREE.SphereGeometry(0.065, 6, 6),
+          new THREE.MeshBasicMaterial({ color: 0xbf9aff, transparent: true, opacity: 0.85 })
+        );
+        s2.position.set(Math.cos(t + Math.PI) * R, yPos, Math.sin(t + Math.PI) * R);
+        helixGroup.add(s1, s2);
+        if (i % 5 === 0) {
+          const bg = new THREE.BufferGeometry().setFromPoints([s1.position.clone(), s2.position.clone()]);
+          helixGroup.add(new THREE.Line(bg, new THREE.LineBasicMaterial({
+            color: 0x8ac9ff, transparent: true, opacity: 0.22
+          })));
+        }
+      }
+      scene.add(helixGroup);
+
+      // ── SPIRAL GALAXY ─────────────────────────────────────────────────
+      const galN = 700;
+      const galPos = new Float32Array(galN * 3);
+      const galCol = new Float32Array(galN * 3);
+      for (let i = 0; i < galN; i++) {
+        const frac = i / galN;
+        const angle = frac * Math.PI * 14;
+        const radius = 0.5 + frac * 4.2;
+        const spread = (Math.random() - 0.5) * 0.45;
+        galPos[i*3]   = Math.cos(angle) * (radius + spread) - 9;
+        galPos[i*3+1] = (Math.random() - 0.5) * 0.4 - 2.5;
+        galPos[i*3+2] = Math.sin(angle) * (radius + spread) - 12;
+        const b = 0.4 + Math.random() * 0.6;
+        galCol[i*3]   = 0.28 * b;
+        galCol[i*3+1] = 0.42 * b;
+        galCol[i*3+2] = b;
+      }
+      const galGeo = new THREE.BufferGeometry();
+      galGeo.setAttribute('position', new THREE.BufferAttribute(galPos, 3));
+      galGeo.setAttribute('color',    new THREE.BufferAttribute(galCol, 3));
+      const galaxy = new THREE.Points(galGeo, new THREE.PointsMaterial({
+        size: 0.055, vertexColors: true, transparent: true, opacity: 0.65
+      }));
+      scene.add(galaxy);
+
+      // ── ENERGY PULSE RINGS ────────────────────────────────────────────
+      const energyRings = [];
+      [
+        { r: 3.0, color: 0x6a8fff, phase: 0,    zRot:  1.0 },
+        { r: 4.6, color: 0xbf9aff, phase: 2.09, zRot: -0.7 },
+        { r: 6.2, color: 0x8ac9ff, phase: 4.19, zRot:  0.5 }
+      ].forEach(cfg => {
+        const ring = new THREE.Mesh(
+          new THREE.TorusGeometry(cfg.r, 0.012, 8, 100),
+          new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: 0 })
+        );
+        ring.position.set(0, 0, -7);
+        ring.rotation.x = Math.PI / 2.8;
+        scene.add(ring);
+        energyRings.push({ mesh: ring, phase: cfg.phase, zRot: cfg.zRot });
+      });
+
+      // ── FLOATING ORB SPHERES ──────────────────────────────────────────
+      const floatOrbs = [];
+      const orbColors = [0x6a8fff, 0xbf9aff, 0x8ac9ff];
+      for (let i = 0; i < 9; i++) {
+        const orb = new THREE.Mesh(
+          new THREE.SphereGeometry(0.10 + Math.random() * 0.12, 8, 8),
+          new THREE.MeshBasicMaterial({
+            color: orbColors[i % 3],
+            transparent: true,
+            opacity: 0.18 + Math.random() * 0.12
+          })
+        );
+        orb.position.set(
+          (Math.random() - 0.5) * 14,
+          (Math.random() - 0.5) * 8,
+          -3 - Math.random() * 6
+        );
+        scene.add(orb);
+        floatOrbs.push({
+          mesh: orb,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.35 + Math.random() * 0.45,
+          baseOpacity: 0.18 + Math.random() * 0.12
+        });
+      }
+
+      // ── MOUSE TRAIL PARTICLE POOL ─────────────────────────────────────
+      const TRAIL_N = 22;
+      const trailPool = [];
+      for (let i = 0; i < TRAIL_N; i++) {
+        const m = new THREE.Mesh(
+          new THREE.SphereGeometry(0.04, 4, 4),
+          new THREE.MeshBasicMaterial({ color: 0x6a8fff, transparent: true, opacity: 0 })
+        );
+        scene.add(m);
+        trailPool.push({ mesh: m, life: 0, maxLife: 28 + Math.floor(Math.random() * 20), active: false });
+      }
+      let trailFrame = 0;
+
+      // ── SHOOTING STAR SYSTEM ──────────────────────────────────────────
       const activeShots = [];
       let shotFrame = 0;
       let nextShotFrame = 100 + Math.floor(Math.random() * 80);
@@ -113,20 +221,74 @@
         rafId = requestAnimationFrame(animate);
         tick += .004;
 
+        // Stars
         stars.rotation.y = tick * .05;
         stars.rotation.x = tick * .02;
 
+        // Nebula
         neb1.rotation.y = tick * 0.08;
         neb2.rotation.y = -tick * 0.06;
 
+        // Camera parallax
         camera.position.x += (mx * .8  - camera.position.x) * .04;
         camera.position.y += (-my * .5 - camera.position.y) * .04;
         camera.position.z  = 5 + scrollY * .004;
 
+        // Wireframe shapes
         shapes.forEach((m, i) => {
           m.rotation.x = tick * (.3 + i * .05);
           m.rotation.y = tick * (.4 + i * .03);
           m.position.y += Math.sin(tick + i * 1.2) * .003;
+        });
+
+        // DNA Helix
+        helixGroup.rotation.y = tick * 0.22;
+        helixGroup.position.y = Math.sin(tick * 0.35) * 0.6;
+
+        // Spiral Galaxy
+        galaxy.rotation.y = tick * 0.026;
+
+        // Energy Rings pulse
+        energyRings.forEach((r, i) => {
+          const pulse = Math.sin(tick * 2.2 + r.phase);
+          r.mesh.material.opacity = Math.max(0, pulse) * 0.20;
+          r.mesh.scale.setScalar(0.97 + Math.abs(pulse) * 0.05);
+          r.mesh.rotation.z += 0.0025 * r.zRot;
+          r.mesh.rotation.y = tick * 0.07 * (i % 2 === 0 ? 1 : -1);
+        });
+
+        // Floating Orbs
+        floatOrbs.forEach(o => {
+          o.mesh.position.y += Math.sin(tick * o.speed + o.phase) * 0.004;
+          o.mesh.position.x += Math.cos(tick * o.speed * 0.6 + o.phase) * 0.002;
+          o.mesh.material.opacity = o.baseOpacity + Math.abs(Math.sin(tick * o.speed * 0.5 + o.phase)) * 0.10;
+        });
+
+        // Mouse Trail
+        trailFrame++;
+        if (trailFrame % 4 === 0) {
+          const free = trailPool.find(p => !p.active);
+          if (free) {
+            free.mesh.position.set(
+              mx * 3.2 + camera.position.x,
+              -my * 2.4 + camera.position.y,
+              camera.position.z - 2.5
+            );
+            free.mesh.material.color.setHex(Math.random() > 0.5 ? 0x6a8fff : 0xbf9aff);
+            free.mesh.material.opacity = 0.5;
+            free.mesh.scale.setScalar(1);
+            free.life = 0;
+            free.active = true;
+          }
+        }
+        trailPool.forEach(p => {
+          if (!p.active) return;
+          p.life++;
+          const t = p.life / p.maxLife;
+          if (t >= 1) { p.active = false; p.mesh.material.opacity = 0; return; }
+          p.mesh.material.opacity = (1 - t) * 0.45;
+          p.mesh.scale.setScalar(1 - t * 0.6);
+          p.mesh.position.y += 0.006;
         });
 
         // Shooting stars
@@ -166,6 +328,7 @@
         window.removeEventListener('scroll',    onScroll);
         window.removeEventListener('resize',    onResize);
         activeShots.forEach(s => { s.geometry.dispose(); s.material.dispose(); });
+        trailPool.forEach(p => { p.mesh.geometry.dispose(); p.mesh.material.dispose(); });
         renderer.dispose();
       };
     }, []);

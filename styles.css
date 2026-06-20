@@ -732,6 +732,168 @@ footer { padding: 26px; border-top: 1px solid rgba(106,143,255,.1); }
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   ENHANCED 3D MOTION ANIMATIONS
+══════════════════════════════════════════════════════════════════════ */
+
+/* ── Synthwave perspective grid in hero ──────────────────────────── */
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: -10%; right: -10%;
+  height: 46%;
+  background-image:
+    linear-gradient(rgba(106,143,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(106,143,255,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(700px) rotateX(60deg);
+  transform-origin: center bottom;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.85) 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.85) 60%, transparent 100%);
+  z-index: 0;
+  animation: gridPulse 5s ease-in-out infinite;
+}
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 0.9; }
+}
+
+/* ── Aurora radial glow under hero ───────────────────────────────── */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 8%; left: 50%;
+  transform: translateX(-50%);
+  width: 80%; height: 220px;
+  background: radial-gradient(ellipse at center, rgba(106,143,255,0.11) 0%, rgba(191,154,255,0.05) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: auroraGlow 7s ease-in-out infinite;
+}
+@keyframes auroraGlow {
+  0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 1;    transform: translateX(-50%) scale(1.18); }
+}
+
+/* ── Hero inner stacks above pseudo-element layers ───────────────── */
+.hero-inner { position: relative; z-index: 2; }
+
+/* ── 3D scroll reveals: add subtle perspective rotation ──────────── */
+.sr-up    { transform: perspective(900px) translateY(35px) rotateX(5deg); }
+.sr-down  { transform: perspective(900px) translateY(-35px) rotateX(-5deg); }
+.sr-left  { transform: perspective(900px) translateX(-45px) rotateY(-5deg); }
+.sr-right { transform: perspective(900px) translateX(45px) rotateY(5deg); }
+.sr.visible {
+  opacity: 1;
+  transform: perspective(900px) translate(0,0) rotateX(0deg) rotateY(0deg);
+}
+
+/* ── 3D tilt: perspective context on all interactive cards ────────── */
+.card,
+.skill-card,
+.project-card,
+.edu-card,
+.tool-card,
+.tl-card,
+.contact-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* ── Disable CSS hover transform when JS tilt is active ──────────── */
+.card.tilt-init:hover,
+.skill-card.tilt-init:hover,
+.project-card.tilt-init:hover,
+.edu-card.tilt-init:hover,
+.tool-card.tilt-init:hover,
+.tl-card.tilt-init:hover,
+.contact-card.tilt-init:hover { transform: none !important; }
+
+/* ── Skill card: animated ring burst on hover ────────────────────── */
+.skill-card { position: relative; overflow: visible; }
+.skill-card::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 19px;
+  border: 1px solid rgba(106,143,255,0.22);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(1);
+}
+@keyframes ringBurst {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.skill-card:hover::after {
+  animation: ringBurst 0.7s ease-out forwards;
+}
+
+/* ── Project card: secondary sweep animation ──────────────────────── */
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%; bottom: 0; width: 60%;
+  background: linear-gradient(90deg, transparent, rgba(106,143,255,0.06), transparent);
+  pointer-events: none;
+  transition: left 0.9s ease;
+}
+.project-card:hover::after {
+  left: 160%;
+}
+
+/* ── Education card shimmer on hover ─────────────────────────────── */
+@keyframes eduShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.edu-card:hover {
+  background: linear-gradient(
+    270deg,
+    rgba(255,255,255,0.04) 0%,
+    rgba(106,143,255,0.09) 50%,
+    rgba(255,255,255,0.04) 100%
+  );
+  background-size: 200% auto;
+  animation: eduShimmer 1.8s ease infinite;
+}
+
+/* ── Tool card: icon pop on hover ────────────────────────────────── */
+.tool-card:hover .tool-icon {
+  transform: translateY(-4px) scale(1.18);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.tool-icon { transition: transform 0.3s ease; }
+
+/* ── Timeline card: glowing left border reveal ───────────────────── */
+@keyframes borderGlow {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+.tl-card { border-left: 2px solid transparent; }
+.tl-card:hover {
+  border-left-color: rgba(106,143,255,0.6);
+  box-shadow: -4px 0 24px rgba(106,143,255,0.2), 0 12px 38px rgba(106,143,255,0.22);
+}
+
+/* ── Contact card: pulsing border glow ───────────────────────────── */
+@keyframes contactPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(106,143,255,0); }
+  50%       { box-shadow: 0 0 28px 4px rgba(106,143,255,0.18); }
+}
+.contact-card:hover {
+  animation: contactPulse 2s ease infinite;
+  border-color: rgba(106,143,255,0.45);
+}
+
+/* ── Mobile: hide heavy CSS pseudo-elements ──────────────────────── */
+@media(max-width:720px) {
+  .hero::before { display: none; }
+  .hero::after  { display: none; }
+}
+
 /* ── Scroll-reveal base ─────────────────────────────────────────── */
 .sr {
   opacity: 0;

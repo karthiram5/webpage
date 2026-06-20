@@ -105,6 +105,59 @@
     })();
   </script>
 
+  <!-- 3D Card Tilt Interaction -->
+  <script>
+    (function () {
+      function setupTilt() {
+        var selectors = [
+          '.card', '.skill-card', '.project-card',
+          '.edu-card', '.tool-card', '.tl-card', '.contact-card'
+        ];
+        selectors.forEach(function (sel) {
+          document.querySelectorAll(sel).forEach(function (card) {
+            if (card.dataset.tiltBound) return;
+            card.dataset.tiltBound = '1';
+            card.classList.add('tilt-init');
+
+            var isHovered = false;
+            var targetX = 0, targetY = 0, curX = 0, curY = 0;
+            var raf;
+
+            function loop() {
+              curX += (targetX - curX) * 0.09;
+              curY += (targetY - curY) * 0.09;
+              card.style.transform =
+                'perspective(900px) rotateX(' + curX.toFixed(3) + 'deg) rotateY(' + curY.toFixed(3) + 'deg) translateZ(6px) scale(1.012)';
+              if (isHovered || Math.abs(curX) > 0.08 || Math.abs(curY) > 0.08) {
+                raf = requestAnimationFrame(loop);
+              } else {
+                card.style.transform = '';
+              }
+            }
+
+            card.addEventListener('mouseenter', function () {
+              isHovered = true;
+              cancelAnimationFrame(raf);
+              loop();
+            });
+            card.addEventListener('mousemove', function (e) {
+              var r = card.getBoundingClientRect();
+              targetX = ((e.clientY - r.top)  / r.height - 0.5) * 18;
+              targetY = ((e.clientX - r.left) / r.width  - 0.5) * -18;
+            });
+            card.addEventListener('mouseleave', function () {
+              isHovered = false;
+              targetX = 0;
+              targetY = 0;
+            });
+          });
+        });
+      }
+      // Run after splash + React render complete
+      setTimeout(setupTilt, 5200);
+    })();
+  </script>
+
 </body>
 </html>
 
