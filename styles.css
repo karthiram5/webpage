@@ -46,6 +46,24 @@ canvas#bg {
   font-weight: 700;
 }
 
+/* Hamburger — hidden on desktop */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px; height: 32px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; height: 2px; border-radius: 2px;
+  background: #b0b8ff;
+  transition: transform .3s, opacity .3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 /* WELCOME SPLASH */
 .splash {
   position: fixed; inset: 0; z-index: 9999;
@@ -368,6 +386,104 @@ canvas#bg {
   padding: 4px 10px;
 }
 
+/* SSO CONNECTED APPS */
+.sso-apps {
+  margin: 14px 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sso-apps-label {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: #7a88ff;
+}
+.sso-apps-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sso-app-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(106,143,255,.08);
+  border: 1px solid rgba(106,143,255,.25);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: default;
+  transition: background .2s, border-color .2s;
+}
+.sso-app-badge:hover {
+  background: rgba(106,143,255,.16);
+  border-color: rgba(106,143,255,.5);
+}
+.sso-app-code {
+  font-size: .72rem;
+  font-weight: 800;
+  color: #bf9aff;
+  letter-spacing: .5px;
+  background: rgba(191,154,255,.12);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+.sso-app-name {
+  font-size: .78rem;
+  color: #c8d4ff;
+}
+
+/* PPS TERMS GLOSSARY */
+.pps-terms {
+  margin-top: 18px;
+  border-top: 1px solid rgba(106,143,255,.15);
+  padding-top: 14px;
+}
+.pps-terms-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; background: none; border: none; cursor: pointer;
+  color: #9fb0ff; font-size: .82rem; letter-spacing: .4px;
+  padding: 4px 0; transition: color .2s;
+}
+.pps-terms-toggle:hover { color: #fff; }
+.pps-terms-toggle span:first-child { font-weight: 600; text-transform: uppercase; letter-spacing: .8px; }
+.pps-chevron { font-size: 1rem; transition: transform .25s; display: inline-block; }
+.pps-chevron--open { transform: rotate(180deg); }
+.pps-terms-list {
+  list-style: none; margin-top: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+  max-height: 320px; overflow-y: auto;
+  padding-right: 4px;
+}
+.pps-terms-list::-webkit-scrollbar { width: 4px; }
+.pps-terms-list::-webkit-scrollbar-track { background: transparent; }
+.pps-terms-list::-webkit-scrollbar-thumb { background: rgba(106,143,255,.3); border-radius: 4px; }
+.pps-terms-list li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  background: rgba(106,143,255,.04);
+  border: 1px solid rgba(106,143,255,.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.pps-term-abbr {
+  grid-row: 1; grid-column: 1;
+  font-size: .72rem; font-weight: 700;
+  color: #bf9aff; letter-spacing: .5px; text-transform: uppercase;
+  align-self: center;
+}
+.pps-term-label {
+  grid-row: 1; grid-column: 2;
+  font-size: .78rem; font-weight: 600; color: #c8d4ff;
+}
+.pps-term-def {
+  grid-row: 2; grid-column: 2;
+  font-size: .74rem; color: #8898cc; line-height: 1.5; margin-top: 2px;
+}
+
 /* TIMELINE */
 .timeline { position:relative; }
 .timeline::before {
@@ -501,19 +617,25 @@ footer { padding: 26px; border-top: 1px solid rgba(106,143,255,.1); }
 
 /* RESPONSIVE */
 @media(max-width:720px){
-  /* NAV — stack logo above wrapped link row */
+  /* NAV — hamburger layout */
   .nav {
-    padding: 10px 16px;
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-  }
-  .nav-links {
-    gap: 4px 10px;
-    font-size: .78rem;
+    padding: 12px 20px;
     flex-wrap: wrap;
+  }
+  .nav-hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 0;
     width: 100%;
-    justify-content: center;
+    padding: 8px 0 4px;
+  }
+  .nav-links.nav-links--open { display: flex; }
+  .nav-links li { border-top: 1px solid rgba(100,120,255,.1); }
+  .nav-links a {
+    display: block;
+    padding: 10px 4px;
+    font-size: .95rem;
   }
 
   /* HERO */

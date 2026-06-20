@@ -1,13 +1,6 @@
 // ─── About Component ─────────────────────────────────────────────────────────
 
 (function () {
-  function calcYearsExp() {
-    var start = new Date('2021-06-01');
-    var now = new Date();
-    var yrs = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
-    return Math.floor(yrs / 12) + '+ Years';
-  }
-
   function About() {
     return (
       <section id="about" className="section">
@@ -29,7 +22,7 @@
               <li><span className="lbl">Role</span>Full Stack Developer</li>
               <li><span className="lbl">Freelance</span>Available (Websites, E-Commerce)</li>
               <li><span className="lbl">Stack</span>Full Stack</li>
-              <li><span className="lbl">Experience</span>{calcYearsExp()}</li>
+              <li><span className="lbl">Experience</span>{calcYearsExp()} Years</li>
               <li><span className="lbl">Location</span>Kanchipuram, Tamil Nadu, India</li>
               <li>
                 <span className="lbl">LinkedIn</span>

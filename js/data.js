@@ -3,13 +3,20 @@
 
 var NAV_LINKS = ['Home', 'About', 'Skills', 'Tools', 'Projects', 'Experience', 'Education', 'Contact'];
 
+function calcYearsExp() {
+  var start = new Date('2021-06-01');
+  var now = new Date();
+  var months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+  return Math.floor(months / 12) + '+';
+}
+
 // ── Icon helpers ──────────────────────────────────────────────────────────
 var DI = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/';
 // Simple Icons CDN — supports /color suffix for tinting SVGs
 var SI = 'https://cdn.simpleicons.org/';
 
 // Inline SVG data URI for SQL Server — no CDN dependency, always renders
-var SQL_SERVER_ICON = "data:image/svg+xml,%3Csvg xmlns='https://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='10' ry='3.2' fill='%23CC2927'/%3E%3Cpath fill='%23a31f1f' d='M2 5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2V5c0 1.77-4.48 3.2-10 3.2S2 6.77 2 5z'/%3E%3Cpath fill='%23CC2927' d='M2 10.5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2v-5.5c0 1.77-4.48 3.2-10 3.2S2 12.27 2 10.5z'/%3E%3Cellipse cx='12' cy='19.2' rx='10' ry='3.2' fill='%23a31f1f'/%3E%3Ctext x='12' y='19.8' font-family='Arial' font-size='4.5' font-weight='bold' fill='white' text-anchor='middle'%3ESQL%3C/text%3E%3C/svg%3E";
+var SQL_SERVER_ICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='10' ry='3.2' fill='%23CC2927'/%3E%3Cpath fill='%23a31f1f' d='M2 5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2V5c0 1.77-4.48 3.2-10 3.2S2 6.77 2 5z'/%3E%3Cpath fill='%23CC2927' d='M2 10.5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2v-5.5c0 1.77-4.48 3.2-10 3.2S2 12.27 2 10.5z'/%3E%3Cellipse cx='12' cy='19.2' rx='10' ry='3.2' fill='%23a31f1f'/%3E%3Ctext x='12' y='19.8' font-family='Arial' font-size='4.5' font-weight='bold' fill='white' text-anchor='middle'%3ESQL%3C/text%3E%3C/svg%3E";
 
 var TOOLS = [
   { icon: DI + 'visualstudio/visualstudio-plain.svg',           name: 'Visual Studio',    category: 'IDE' },
@@ -56,20 +63,50 @@ var SKILLS = [
   { icon: DI + 'azure/azure-original.svg',             label: 'Azure',                category: 'DevOps & Cloud' },
   { icon: DI + 'docker/docker-original.svg',           label: 'Docker',               category: 'DevOps & Cloud' },
   { icon: DI + 'git/git-original.svg',                 label: 'Git & Version Control',category: 'DevOps & Cloud' },
+  // Development with AI
+  { icon: SI + 'claude/d97706',                        label: 'Claude AI',            category: 'Development with AI' },
+  { icon: SI + 'githubcopilot/8b949e',                 label: 'GitHub Copilot',       category: 'Development with AI' },
+  { icon: SI + 'openai/74aa9c',                        label: 'ChatGPT',              category: 'Development with AI' },
+  { icon: SI + 'deepseek/4d6bff',                      label: 'DeepSeek',             category: 'Development with AI' },
+  { icon: SI + 'googlegemini/4285f4',                  label: 'Gemini AI',            category: 'Development with AI' },
+  { icon: SI + 'perplexity/20b2aa',                    label: 'Perplexity AI',        category: 'Development with AI' },
+  { icon: '🎨',                                         label: 'Gamma AI',             category: 'Development with AI' },
+  { icon: '⌨️',                                         label: 'Claude CLI',           category: 'Development with AI' },
 ];
 
 var PROJECTS = [
   {
-    code: 'NPS',
-    title: 'Net Promoter Scores',
-    desc: 'Implemented a customer feedback and scoring workflow to track promoter, passive, and detractor trends with actionable dashboards.',
-    stack: ['PHP-CodeIgniter','MySQL', 'REST APIs']
+    code: 'SSO',
+    title: 'Single Sign-On',
+    desc: 'Built a centralised authentication gateway enabling secure, one-login access across multiple internal applications - including the NPS (Net Promoter Score) and CSAT (Customer Satisfaction) platforms - eliminating repeated credential entry and enforcing role-based access control across all connected systems.',
+    stack: ['Node.js', 'PostgreSQL', 'REST APIs', 'JWT', 'OAuth 2.0'],
+    apps: [
+      { code: 'NPS', name: 'Net Promoter Score',       desc: 'Tracks promoter, passive & detractor trends with actionable dashboards.' },
+      { code: 'CSAT', name: 'Customer Satisfaction',   desc: 'Measures post-interaction satisfaction scores across customer touchpoints.' },
+    ]
   },
   {
     code: 'PPS',
     title: 'Production Planning Software',
     desc: 'Developed planning and execution modules to improve production scheduling, material visibility, and delivery coordination across teams.',
-    stack: ['React', 'Node.js', 'PostgreSQL', 'GitHub', 'Docker', 'AWS']
+    stack: ['React', 'Node.js', 'PostgreSQL', 'GitHub', 'Docker', 'AWS'],
+    terms: [
+      { abbr: 'MO',                    label: 'Manufacturing Order',      def: 'Order managing production from raw materials to finished goods with inventory & cost tracking.' },
+      { abbr: 'SO',                    label: 'Sales Order',              def: 'Customer order that drives production planning; MOs are linked directly in make-to-order flow.' },
+      { abbr: 'Stock Order',           label: 'Stock Order',              def: 'MO built for future inventory (make-to-stock) rather than a specific customer order.' },
+      { abbr: 'Pick List',             label: 'Pick List',                def: 'Document listing all materials, quantities, and storage locations needed for an MO.' },
+      { abbr: 'Batch Tracking',        label: 'Batch / Lot Tracking',     def: 'Assigns lot numbers to materials and finished goods for quality control and traceability.' },
+      { abbr: 'Expiry Tracking',       label: 'Expiry Date Tracking',     def: 'Monitors shelf life to prevent use of expired stock in production.' },
+      { abbr: 'Available vs Booked',   label: 'Available vs. Booked',     def: 'Available = free inventory; Booked = reserved for a specific order or production run.' },
+      { abbr: 'Expected Qty',          label: 'Expected Quantity',        def: 'Incoming inventory from open purchase orders or in-progress production runs.' },
+      { abbr: 'Replenishment',         label: 'Replenishment',            def: 'Auto or manual reorder triggered when stock falls to a defined reorder point.' },
+      { abbr: 'Landed Cost',           label: 'Landed Cost',              def: 'Total product cost including purchase price, shipping, tariffs, and import fees.' },
+      { abbr: 'Tariff Mgmt',           label: 'Tariff Management',        def: 'Captures and distributes tariff costs within purchase orders as part of landed cost.' },
+      { abbr: '3PL',                   label: 'Third-Party Logistics',    def: 'External logistics providers integrated into inventory and fulfilment workflows.' },
+      { abbr: 'Shop Floor App',        label: 'Shop Floor App',           def: 'Mobile interface for workers to view tasks, scan barcodes, and update production status in real time.' },
+      { abbr: 'Smart Inventory',       label: 'Smart Inventory',          def: 'Real-time cross-channel inventory system ensuring accurate stock levels across all locations.' },
+      { abbr: 'E2E Traceability',      label: 'End-to-End Traceability',  def: 'Full product tracking from raw material procurement through production to final delivery.' },
+    ]
   }
 ];
 

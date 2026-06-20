@@ -20,7 +20,7 @@
               >
                 🔗 LinkedIn
               </a>
-              <a className="contact-link em" href="mailto:karthiece55@gamil.com">
+              <a className="contact-link em" href="mailto:karthiece55@gmail.com">
                 ✉️ Send Email
               </a>
             </div>

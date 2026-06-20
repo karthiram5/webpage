@@ -4,8 +4,9 @@
   const { useState, useEffect, useRef } = React;
 
   function Navbar() {
-    const [active, setActive] = useState('home');
-    const navRef              = useRef(null);
+    const [active, setActive]   = useState('home');
+    const [menuOpen, setMenuOpen] = useState(false);
+    const navRef                = useRef(null);
 
     useEffect(() => {
       const observers = [];
@@ -32,12 +33,23 @@
     const scrollTo = (id) => {
       const el = document.getElementById(id.toLowerCase());
       if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setMenuOpen(false);
     };
 
     return (
       <nav ref={navRef} className="nav">
         <div className="nav-logo">KR</div>
-        <ul className="nav-links">
+        <button
+          className={`nav-hamburger${menuOpen ? ' open' : ''}`}
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(o => !o)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul className={`nav-links${menuOpen ? ' nav-links--open' : ''}`}>
           {NAV_LINKS.map(l => (
             <li key={l}>
               <a

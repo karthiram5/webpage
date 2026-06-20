@@ -8,7 +8,7 @@
     useEffect(() => {
       const timer = setTimeout(onDone, 4200);
       return () => clearTimeout(timer);
-    }, []);
+    }, [onDone]);
 
     return (
       <div className="splash">

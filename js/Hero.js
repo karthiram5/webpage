@@ -16,13 +16,13 @@
         }, 110);
       }, startDelay);
       return function () { clearTimeout(t); clearInterval(iv); };
-    }, []);
+    }, [text, startDelay]);
     return { display, done };
   }
 
   function RobotSVG() {
     return (
-      <svg className="ai-robot" viewBox="0 0 160 200" xmlns="https://www.w3.org/2000/svg">
+      <svg className="ai-robot" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#6a8fff" />
@@ -96,13 +96,6 @@
         <rect x="82" y="192" width="32" height="8" rx="4" fill="#bf9aff" opacity="0.7"/>
       </svg>
     );
-  }
-
-  function calcYearsExp() {
-    var start = new Date('2021-06-01');
-    var now = new Date();
-    var months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
-    return Math.floor(months / 12) + '+';
   }
 
   function Hero() {
