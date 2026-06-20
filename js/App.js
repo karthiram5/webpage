@@ -1,5 +1,4 @@
 // ─── App Root ────────────────────────────────────────────────────────────────
-// Composes all components and mounts to #root.
 
 (function () {
   const { useState } = React;

@@ -72,34 +72,6 @@
       pt.position.set(5, 5, 5);
       scene.add(pt);
 
-      // ── DNA HELIX ─────────────────────────────────────────────────────
-      const helixGroup = new THREE.Group();
-      helixGroup.position.set(7, 0, -7);
-      const N_HELIX = 28;
-      for (let i = 0; i < N_HELIX; i++) {
-        const t = (i / N_HELIX) * Math.PI * 7;
-        const yPos = (i / N_HELIX - 0.5) * 8;
-        const R = 0.85;
-        const s1 = new THREE.Mesh(
-          new THREE.SphereGeometry(0.065, 6, 6),
-          new THREE.MeshBasicMaterial({ color: 0x6a8fff, transparent: true, opacity: 0.85 })
-        );
-        s1.position.set(Math.cos(t) * R, yPos, Math.sin(t) * R);
-        const s2 = new THREE.Mesh(
-          new THREE.SphereGeometry(0.065, 6, 6),
-          new THREE.MeshBasicMaterial({ color: 0xbf9aff, transparent: true, opacity: 0.85 })
-        );
-        s2.position.set(Math.cos(t + Math.PI) * R, yPos, Math.sin(t + Math.PI) * R);
-        helixGroup.add(s1, s2);
-        if (i % 5 === 0) {
-          const bg = new THREE.BufferGeometry().setFromPoints([s1.position.clone(), s2.position.clone()]);
-          helixGroup.add(new THREE.Line(bg, new THREE.LineBasicMaterial({
-            color: 0x8ac9ff, transparent: true, opacity: 0.22
-          })));
-        }
-      }
-      scene.add(helixGroup);
-
       // ── SPIRAL GALAXY ─────────────────────────────────────────────────
       const galN = 700;
       const galPos = new Float32Array(galN * 3);
@@ -168,19 +140,6 @@
         });
       }
 
-      // ── MOUSE TRAIL PARTICLE POOL ─────────────────────────────────────
-      const TRAIL_N = 22;
-      const trailPool = [];
-      for (let i = 0; i < TRAIL_N; i++) {
-        const m = new THREE.Mesh(
-          new THREE.SphereGeometry(0.04, 4, 4),
-          new THREE.MeshBasicMaterial({ color: 0x6a8fff, transparent: true, opacity: 0 })
-        );
-        scene.add(m);
-        trailPool.push({ mesh: m, life: 0, maxLife: 28 + Math.floor(Math.random() * 20), active: false });
-      }
-      let trailFrame = 0;
-
       // ── SHOOTING STAR SYSTEM ──────────────────────────────────────────
       const activeShots = [];
       let shotFrame = 0;
@@ -241,10 +200,6 @@
           m.position.y += Math.sin(tick + i * 1.2) * .003;
         });
 
-        // DNA Helix
-        helixGroup.rotation.y = tick * 0.22;
-        helixGroup.position.y = Math.sin(tick * 0.35) * 0.6;
-
         // Spiral Galaxy
         galaxy.rotation.y = tick * 0.026;
 
@@ -262,33 +217,6 @@
           o.mesh.position.y += Math.sin(tick * o.speed + o.phase) * 0.004;
           o.mesh.position.x += Math.cos(tick * o.speed * 0.6 + o.phase) * 0.002;
           o.mesh.material.opacity = o.baseOpacity + Math.abs(Math.sin(tick * o.speed * 0.5 + o.phase)) * 0.10;
-        });
-
-        // Mouse Trail
-        trailFrame++;
-        if (trailFrame % 4 === 0) {
-          const free = trailPool.find(p => !p.active);
-          if (free) {
-            free.mesh.position.set(
-              mx * 3.2 + camera.position.x,
-              -my * 2.4 + camera.position.y,
-              camera.position.z - 2.5
-            );
-            free.mesh.material.color.setHex(Math.random() > 0.5 ? 0x6a8fff : 0xbf9aff);
-            free.mesh.material.opacity = 0.5;
-            free.mesh.scale.setScalar(1);
-            free.life = 0;
-            free.active = true;
-          }
-        }
-        trailPool.forEach(p => {
-          if (!p.active) return;
-          p.life++;
-          const t = p.life / p.maxLife;
-          if (t >= 1) { p.active = false; p.mesh.material.opacity = 0; return; }
-          p.mesh.material.opacity = (1 - t) * 0.45;
-          p.mesh.scale.setScalar(1 - t * 0.6);
-          p.mesh.position.y += 0.006;
         });
 
         // Shooting stars
@@ -328,7 +256,6 @@
         window.removeEventListener('scroll',    onScroll);
         window.removeEventListener('resize',    onResize);
         activeShots.forEach(s => { s.geometry.dispose(); s.material.dispose(); });
-        trailPool.forEach(p => { p.mesh.geometry.dispose(); p.mesh.material.dispose(); });
         renderer.dispose();
       };
     }, []);

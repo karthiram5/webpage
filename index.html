@@ -108,6 +108,9 @@
   <!-- 3D Card Tilt Interaction -->
   <script>
     (function () {
+      // Skip on touch-only devices — no mouse to track
+      if ('ontouchstart' in window && !window.matchMedia('(pointer:fine)').matches) return;
+
       function setupTilt() {
         var selectors = [
           '.card', '.skill-card', '.project-card',

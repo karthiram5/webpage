@@ -888,10 +888,34 @@ footer { padding: 26px; border-top: 1px solid rgba(106,143,255,.1); }
   border-color: rgba(106,143,255,0.45);
 }
 
-/* ── Mobile: hide heavy CSS pseudo-elements ──────────────────────── */
+/* ── Mobile: simplify / strip heavy effects ──────────────────────── */
 @media(max-width:720px) {
+  /* Hide perspective grid & aurora glow */
   .hero::before { display: none; }
   .hero::after  { display: none; }
+
+  /* Flat 2D scroll-reveals — no rotateX/Y on mobile */
+  .sr-up    { transform: translateY(24px); }
+  .sr-down  { transform: translateY(-24px); }
+  .sr-left  { transform: translateX(-28px); }
+  .sr-right { transform: translateX(28px); }
+  .sr.visible { transform: translate(0, 0); }
+
+  /* Disable 3D card context — avoid mobile GPU / stacking issues */
+  .card,
+  .skill-card,
+  .project-card,
+  .edu-card,
+  .tool-card,
+  .tl-card,
+  .contact-card {
+    transform-style: flat;
+    will-change: auto;
+  }
+
+  /* Tools grid — 2 columns on mobile for better readability */
+  .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .tool-card  { padding: 18px 12px; gap: 8px; }
 }
 
 /* ── Scroll-reveal base ─────────────────────────────────────────── */

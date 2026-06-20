@@ -18,12 +18,19 @@ var SI = 'https://cdn.simpleicons.org/';
 // Inline SVG data URI for SQL Server — no CDN dependency, always renders
 var SQL_SERVER_ICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='5' rx='10' ry='3.2' fill='%23CC2927'/%3E%3Cpath fill='%23a31f1f' d='M2 5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2V5c0 1.77-4.48 3.2-10 3.2S2 6.77 2 5z'/%3E%3Cpath fill='%23CC2927' d='M2 10.5v5.5c0 1.77 4.48 3.2 10 3.2s10-1.43 10-3.2v-5.5c0 1.77-4.48 3.2-10 3.2S2 12.27 2 10.5z'/%3E%3Cellipse cx='12' cy='19.2' rx='10' ry='3.2' fill='%23a31f1f'/%3E%3Ctext x='12' y='19.8' font-family='Arial' font-size='4.5' font-weight='bold' fill='white' text-anchor='middle'%3ESQL%3C/text%3E%3C/svg%3E";
 
+// XAMPP — orange rounded square with white X (matches official logo style)
+var XAMPP_ICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23FB7A24'/%3E%3Cline x1='7' y1='7' x2='17' y2='17' stroke='white' stroke-width='3.2' stroke-linecap='round'/%3E%3Cline x1='17' y1='7' x2='7' y2='17' stroke='white' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E";
+
+// HeidiSQL — teal circle with bold white H (matches brand colour #4299B4)
+var HEIDISQL_ICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%234299B4'/%3E%3Crect x='7' y='7' width='2.5' height='10' rx='1' fill='white'/%3E%3Crect x='14.5' y='7' width='2.5' height='10' rx='1' fill='white'/%3E%3Crect x='7' y='10.75' width='10' height='2.5' rx='1' fill='white'/%3E%3C/svg%3E";
+
+// ChatGPT — official icon from uxwing
+var CHATGPT_ICON = "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/chatgpt-icon.png";
+
 var TOOLS = [
   { icon: DI + 'visualstudio/visualstudio-plain.svg',           name: 'Visual Studio',    category: 'IDE' },
   { icon: DI + 'vscode/vscode-original.svg',                    name: 'VS Code',           category: 'IDE' },
   // AI Tools
-  { icon: SI + 'claude/d97706',                                  name: 'Claude',            category: 'AI Tools' },
-  { icon: SI + 'githubcopilot/8b949e',                          name: 'GitHub Copilot',    category: 'AI Tools' },
   { icon: '⌨️',                                                  name: 'Cursor',            category: 'AI Tools' },
   { icon: '🔌',                                                  name: 'MCP Server',        category: 'AI Tools' },
   { icon: '🚀',                                                  name: 'Antigravity',       category: 'AI Tools' },
@@ -37,7 +44,8 @@ var TOOLS = [
   { icon: '🗄️',                                                  name: 'SSMS',              category: 'Database' },
   { icon: SQL_SERVER_ICON,                                        name: 'SQL Server',        category: 'Database' },
   { icon: DI + 'postgresql/postgresql-original.svg',            name: 'PostgreSQL',        category: 'Database' },
-  { icon: DI + 'mysql/mysql-original.svg',                      name: 'MySQL',             category: 'Database' },
+  { icon: XAMPP_ICON,                                            name: 'XAMPP',             category: 'Local Dev' },
+  { icon: HEIDISQL_ICON,                                         name: 'HeidiSQL',          category: 'Database' },
   // Other
   { icon: DI + 'postman/postman-original.svg',                  name: 'Postman',           category: 'API Testing' },
   { icon: DI + 'chrome/chrome-original.svg',                    name: 'Chrome DevTools',   category: 'Debugging' },
@@ -66,7 +74,7 @@ var SKILLS = [
   // Development with AI
   { icon: SI + 'claude/d97706',                        label: 'Claude AI',            category: 'Development with AI' },
   { icon: SI + 'githubcopilot/8b949e',                 label: 'GitHub Copilot',       category: 'Development with AI' },
-  { icon: SI + 'openai/74aa9c',                        label: 'ChatGPT',              category: 'Development with AI' },
+  { icon: CHATGPT_ICON,                                  label: 'ChatGPT',              category: 'Development with AI' },
   { icon: SI + 'deepseek/4d6bff',                      label: 'DeepSeek',             category: 'Development with AI' },
   { icon: SI + 'googlegemini/4285f4',                  label: 'Gemini AI',            category: 'Development with AI' },
   { icon: SI + 'perplexity/20b2aa',                    label: 'Perplexity AI',        category: 'Development with AI' },
