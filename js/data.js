@@ -86,12 +86,26 @@ var PROJECTS = [
   {
     code: 'SSO',
     title: 'Single Sign-On',
-    desc: 'Built a centralised authentication gateway enabling secure, one-login access across multiple internal applications - including the NPS (Net Promoter Score) and CSAT (Customer Satisfaction) platforms - eliminating repeated credential entry and enforcing role-based access control across all connected systems.',
+    desc: 'Built a centralised authentication gateway enabling secure, one-login access across multiple internal applications - including NPS and CSAT platforms - eliminating repeated credential entry and enforcing role-based access control across all connected systems. The gateway issues JWT tokens on successful login, which downstream apps validate independently without hitting the auth server on every request.',
     stack: ['Node.js', 'PostgreSQL', 'REST APIs', 'JWT', 'OAuth 2.0'],
     apps: [
-      { code: 'NPS', name: 'Net Promoter Score',       desc: 'Tracks promoter, passive & detractor trends with actionable dashboards.' },
-      { code: 'CSAT', name: 'Customer Satisfaction',   desc: 'Measures post-interaction satisfaction scores across customer touchpoints.' },
+      { code: 'NPS',  name: 'Net Promoter Score',    desc: 'Tracks promoter, passive & detractor trends with actionable dashboards.' },
+      { code: 'CSAT', name: 'Customer Satisfaction', desc: 'Measures post-interaction satisfaction scores across customer touchpoints.' },
     ]
+  },
+  {
+    code: 'NPS',
+    title: 'Net Promoter Score',
+    desc: 'Developed an internal NPS platform that collects customer loyalty feedback through automated surveys and visualises the results on a real-time dashboard. Customers are scored 0-10 and classified as Promoters (9-10), Passives (7-8), or Detractors (0-6). The NPS score is calculated as the percentage of Promoters minus Detractors, giving management an instant pulse on customer sentiment. Authentication is handled entirely through the SSO gateway - no separate login required.',
+    stack: ['React', 'Node.js', 'PostgreSQL', 'REST APIs', 'JWT', 'Chart.js'],
+    ssoLinked: true,
+  },
+  {
+    code: 'CSAT',
+    title: 'Customer Satisfaction',
+    desc: 'Built a CSAT platform that captures post-interaction satisfaction ratings across key customer touchpoints - support calls, deliveries, and onboarding. Agents and customers submit ratings on a 1-5 scale; the system aggregates scores by team, time period, and interaction type, and surfaces trend charts for operations managers. Integrated with the SSO gateway so internal staff can access reports without a separate login, and survey links sent to customers use secure one-time tokens.',
+    stack: ['React', 'Node.js', 'PostgreSQL', 'REST APIs', 'JWT', 'Chart.js'],
+    ssoLinked: true,
   },
   {
     code: 'PPS',
@@ -131,7 +145,7 @@ var EXPERIENCE = [
     company: 'RepuNEXT · Chennai, Tamil Nadu, India',
     start: '2021-06',
     end: '2025-03',
-    desc: 'Worked as a Software Engineer contributing to the full development lifecycle — requirement analysis, system design, implementation and production support using .NET, Node.js, PHP, and modern front-end frameworks.',
+    desc: 'Worked as a Software Engineer contributing to the full development lifecycle - requirement analysis, system design, implementation and production support using .NET, Node.js, PHP, and modern front-end frameworks.',
   },
 ];
 
@@ -140,14 +154,14 @@ var EDUCATION = [
     icon: '🎓',
     degree: 'Bachelor of Engineering',
     institution: 'Pallavan College of Engineering',
-    desc: 'Specialization in Electronics & Communication Engineering — building strong fundamentals in electronics, signal processing, and systems design.',
+    desc: 'Specialization in Electronics & Communication Engineering - building strong fundamentals in electronics, signal processing, and systems design.',
     badge: 'B.E – Electronics & Communication Engineering',
   },
   {
     icon: '🏛️',
     degree: 'Master of Business Administration',
     institution: 'Alagappa University',
-    desc: 'Specialization in Systems Management — bridging technology and business strategy with a focus on information systems, project management, and organizational decision-making.',
+    desc: 'Specialization in Systems Management - bridging technology and business strategy with a focus on information systems, project management, and organizational decision-making.',
     badge: 'MBA – Systems Management',
   },
 ];

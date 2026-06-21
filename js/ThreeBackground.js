@@ -37,18 +37,6 @@
       );
       scene.add(stars);
 
-      // ── Nebula blobs ──────────────────────────────────────────────────
-      function addNebula(color, x, y, z, r) {
-        const mesh = new THREE.Mesh(
-          new THREE.SphereGeometry(r, 8, 8),
-          new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.042, side: THREE.BackSide })
-        );
-        mesh.position.set(x, y, z);
-        scene.add(mesh);
-        return mesh;
-      }
-      const neb1 = addNebula(0x2255dd, -18, 10, -28, 14);
-      const neb2 = addNebula(0x882266, 22,  -6, -32, 11);
 
       // ── Wireframe shapes ──────────────────────────────────────────────
       const shapes = [];
@@ -183,10 +171,6 @@
         // Stars
         stars.rotation.y = tick * .05;
         stars.rotation.x = tick * .02;
-
-        // Nebula
-        neb1.rotation.y = tick * 0.08;
-        neb2.rotation.y = -tick * 0.06;
 
         // Camera parallax
         camera.position.x += (mx * .8  - camera.position.x) * .04;

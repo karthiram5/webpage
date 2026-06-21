@@ -52,6 +52,12 @@
               <div className="project-top">
                 <span className="project-code">{project.code}</span>
                 <h3>{project.title}</h3>
+                {project.ssoLinked && (
+                  <span className="sso-badge" title="Authentication via SSO gateway">🔐 SSO Auth</span>
+                )}
+                {project.aiPowered && (
+                  <span className="ai-badge" title="AI-powered automation">🤖 AI Powered</span>
+                )}
               </div>
               <p>{project.desc}</p>
               {project.apps && <ConnectedApps apps={project.apps} />}
